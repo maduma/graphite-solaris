@@ -2,7 +2,6 @@
 import cmdreader
 
 def stream(period):
-
+    
     cmd = ['/usr/bin/iostat', '-xnz', str(period)]
-    st = cmdreader.stream(cmd, period)
-    return st
+    return cmdreader.stream(cmd, period)
