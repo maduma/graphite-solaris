@@ -9,7 +9,7 @@ print('Period: ' + str(producer_stream.period))
 print('###')
 
 for line in formater.dlstat.get_iterator(producer_stream):
-    print line,
+    print line
 
 producer_stream.close()
 
@@ -24,7 +24,7 @@ print('###')
 it = formater.dlstat.get_iterator(producer_stream)
 
 for _ in range(16):
-    print it.next(),
+    print it.next()
 
 producer_stream.close()
 
