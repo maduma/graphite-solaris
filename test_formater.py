@@ -8,8 +8,7 @@ print('### filereader')
 print('Period: ' + str(producer_stream.period))
 print('###')
 
-it = formater.dlstat.get_iterator(producer_stream)
-for line in it:
+for line in formater.dlstat.get_iterator(producer_stream):
     print line,
 
 producer_stream.close()
@@ -23,6 +22,7 @@ print('Period: ' + str(producer_stream.period))
 print('###')
 
 it = formater.dlstat.get_iterator(producer_stream)
+
 for _ in range(15):
     print it.next(),
 
