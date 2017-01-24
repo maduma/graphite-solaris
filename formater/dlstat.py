@@ -3,6 +3,8 @@ import chunker.dlstat
 
 def tranform(chunk, period):
     epoch = chunk.pop(0).rstrip()
+    hint = len(chunk * 3)
+    yield 'CHUNK_SIZE:{0}\n'.format(hint)
     for line in chunk:
         (zone, interface, rbytes, obytes) = line.rstrip().split(':')
         interface = interface.split('/')[-1] # remove zone in interface name
@@ -21,7 +23,6 @@ def get_iterator(stream):
 
     def iterator():
         for chunk in it:
-            print "-----------------------------"
             for line in tranform(chunk, period):
                 yield line
     

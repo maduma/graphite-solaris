@@ -23,7 +23,7 @@ print('###')
 
 it = formater.dlstat.get_iterator(producer_stream)
 
-for _ in range(15):
+for _ in range(16):
     print it.next(),
 
 producer_stream.close()
