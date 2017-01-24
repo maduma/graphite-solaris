@@ -15,7 +15,7 @@ st = itertools.izip(st1.it, st2.it, st3.it)
 for _ in range(10):
     lines = st.next()
     print ''.join(lines),
-_
+
 st1.close()
 st2.close()
 st3.close()
