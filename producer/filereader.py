@@ -1,8 +1,8 @@
 # file reader iterator
-def stream(path):
+def get_stream(path):
 
     # read period value
-    def get_period():
+    def period():
         with open(path, 'r') as f:
             for line in f:
                 if line.startswith('# period:'):
@@ -16,7 +16,7 @@ def stream(path):
     
     class Stream:
         def __init__(self):
-            self.period = get_period()
+            self.period = period()
             self.it = iterator()
         def close(self):
             pass

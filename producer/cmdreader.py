@@ -1,7 +1,7 @@
 # cmd reader iterator
 import subprocess
 
-def stream(cmd, period):
+def get_stream(cmd, period):
     
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE) 
 
