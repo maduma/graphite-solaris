@@ -11,6 +11,7 @@ def send_tcp(msg):
 def get_iterator(formater_it):
     buffer_it = buffer.hint.get_buffer(formater_it)
     for buf in buffer_it:
+        if not buf: continue # empty buffer
         buf.append('') # last char must be a NEWLINE
         send_tcp('\n'.join(buf))
         yield

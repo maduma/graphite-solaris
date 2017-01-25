@@ -10,17 +10,19 @@ def tranform(chunk):
     epoch = chunk.pop(0).rstrip()
 
     for line in chunk:
+        if line.startswith('extended'): continue
+        if line.startswith('r/s'): continue
+        '''
         (zone, interface, rbytes, obytes) = line.rstrip().split(':')
-
-        interface = interface.split('/')[-1] # remove zone in interface name
         total_bytes = str(int(rbytes) + int(obytes)) # add a new stat
-
         msg = '{0}.{1}.{2}.{{0}} {{1}} {3}'.format(
             prefix, zone, interface, epoch)
 
         yield msg.format('bytes', total_bytes)
         yield msg.format('rbytes', rbytes)
         yield msg.format('obytes', obytes)
+        '''
+        yield line.rstrip()
 
     yield config.HINT # usefull hint for consumer
 

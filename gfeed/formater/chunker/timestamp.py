@@ -1,16 +1,15 @@
 import re
 
-def get_iterator(it):
+def get_iterator(it, discard_first=False):
 
     timestamp = re.compile('^\d{10}$')
     chunck = []
-    first = True
 
     for line in it:
         if timestamp.match(line) and chunck: # not first occurence of timestamp
 
-            if first: # discard the first chunck (aggregate stat)
-                first = False
+            if discard_first: # discard the first chunck (aggregate stat)
+                discard_first = False
                 chunck = [line]
                 continue
 
