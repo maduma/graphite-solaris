@@ -7,6 +7,7 @@ def get_stream(path):
             for line in f:
                 if line.startswith('# period:'):
                     return int(line.split(':')[1])
+        raise LookupError('Cannot found period in file')
 
     def iterator():
         with open(path, 'r') as f:

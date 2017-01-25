@@ -3,7 +3,7 @@ import subprocess
 
 def get_stream(cmd, period):
     
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE) 
+    p = subprocess.Popen(cmd, stdin=None, stdout=subprocess.PIPE, stderr=None) 
 
     def iterator():
         for line in iter(p.stdout.readline, ''):
