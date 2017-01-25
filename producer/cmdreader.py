@@ -4,7 +4,7 @@ import sys
 
 def get_stream(cmd, period, name='cmdreader'):
     
-    p = subprocess.Popen(cmd, stdin=None, stdout=subprocess.PIPE, stderr=None) 
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=None) 
 
     def iterator():
         for line in iter(p.stdout.readline, ''):
@@ -16,7 +16,8 @@ def get_stream(cmd, period, name='cmdreader'):
             self.it = iterator()
             self.p = p
         def close(self):
-            sys.stderr.write('Stoping producer: {0} ...\n'.format(name))
+            msg = 'Stoping producer: {0} ...\n'.format(name)
+            sys.stderr.write(msg)
             self.p.stdout.close()
             self.p.kill()
             self.p.wait()

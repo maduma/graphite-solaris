@@ -9,10 +9,12 @@ def send_tcp(msg):
     s.connect((SERVER, PORT))
     s.sendall(msg)
     s.close()
+    print(msg),
 
 def get_iterator(formater_it):
     buffer_it = buffer.hint.get_buffer(formater_it)
     for buf in buffer_it:
-        buf.append('\n') # terminal EOL
+        print(buf)
+        buf.append('\n')
         send_tcp('\n'.join(buf))
         yield
