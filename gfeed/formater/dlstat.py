@@ -1,10 +1,9 @@
 import chunker.dlstat
 import socket
+from .. import config
 
-LABEL='lxstat'
-HINT='CHUNK'
-
-prefix = '{0}.{1}'.format(LABEL, socket.gethostname())
+prefix = '{0}.{1}.{2}'.format(
+    config.LABEL, socket.gethostname(), config.DLSTAT)
 
 # dlstat data are normalised (bytes/s)
 def tranform(chunk):
@@ -23,7 +22,7 @@ def tranform(chunk):
         yield msg.format('rbytes', rbytes)
         yield msg.format('obytes', obytes)
 
-    yield HINT # usefull hint for consumer
+    yield config.HINT # usefull hint for consumer
 
 def get_iterator(stream):
 

@@ -1,8 +1,10 @@
 import producer.filereader
 import producer.dlstat
 import formater.dlstat
+import os
 
-producer_stream = producer.filereader.get_stream('sample/dlstat.txt')
+PKGDIR = os.path.dirname(os.path.realpath(__file__))
+producer_stream = producer.filereader.get_stream(PKGDIR + '/sample/dlstat.txt')
 
 print('### filereader')
 print('Period: ' + str(producer_stream.period))

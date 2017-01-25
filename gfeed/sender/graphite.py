@@ -1,12 +1,10 @@
 import buffer.hint
 import socket
-
-SERVER='graphitea.svr.luxair'
-PORT=2003
+from .. import config
 
 def send_tcp(msg):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect((SERVER, PORT))
+    s.connect((config.SERVER, config.PORT))
     s.sendall(msg)
     s.close()
 

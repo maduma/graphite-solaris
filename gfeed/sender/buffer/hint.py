@@ -1,7 +1,9 @@
+from ... import config
+
 def get_buffer(it):
     buf = []
     for line in it:
-        if line == 'CHUNK' and buf:
+        if line == config.HINT and buf:
             yield buf
             buf = []
         else:

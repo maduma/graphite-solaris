@@ -2,8 +2,11 @@ import itertools
 import producer.filereader
 import producer.cmdreader
 import producer.iostat
+import os
 
-st1 = producer.filereader.get_stream('sample/dlstat.txt')
+PKGDIR = os.path.dirname(os.path.realpath(__file__))
+
+st1 = producer.filereader.get_stream(PKGDIR + '/sample/dlstat.txt')
 st2 = producer.cmdreader.get_stream(['/usr/bin/vmstat', '1'], 1)
 st3 = producer.iostat.get_stream(1)
 

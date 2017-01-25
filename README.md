@@ -38,3 +38,10 @@ We can also normalize stat here (e.g op/s, byte/s)
 
 # implementaion detail
 Streams will be implemented using iterator
+
+# test
+```
+python -m gfeed.test_producer
+python -m gfeed.test_formater
+python -m gfeed.test_sender
+```

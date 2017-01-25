@@ -6,9 +6,10 @@ import sender.stdouthint
 import sender.graphite
 import signal
 import sys
-import time
+import os
 
-producer_stream = producer.filereader.get_stream('sample/dlstat.txt')
+PKGDIR = os.path.dirname(os.path.realpath(__file__))
+producer_stream = producer.filereader.get_stream(PKGDIR + '/sample/dlstat.txt')
 formater_it = formater.dlstat.get_iterator(producer_stream)
 sender_it = sender.stdout.get_iterator(formater_it)
 
@@ -18,7 +19,7 @@ producer_stream.close()
 
 ### --- ###
 
-producer_stream = producer.filereader.get_stream('sample/dlstat.txt')
+producer_stream = producer.filereader.get_stream(PKGDIR + '/sample/dlstat.txt')
 formater_it = formater.dlstat.get_iterator(producer_stream)
 sender_it = sender.stdouthint.get_iterator(formater_it)
 
