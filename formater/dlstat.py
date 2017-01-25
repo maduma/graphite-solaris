@@ -4,9 +4,6 @@ import chunker.dlstat
 def tranform(chunk, period):
     epoch = chunk.pop(0).rstrip()
 
-    hint = len(chunk) * 3 # number of stat per chunk
-    yield 'CHUNK_SIZE:{0}'.format(hint) # usefull hint for sender
-
     for line in chunk:
         (zone, interface, rbytes, obytes) = line.rstrip().split(':')
 
@@ -19,6 +16,8 @@ def tranform(chunk, period):
         yield msg.format('bytes', total_bytes)
         yield msg.format('rbytes', rbytes)
         yield msg.format('obytes', obytes)
+
+    yield 'CHUNK' # usefull hint for consumer
 
 def get_iterator(stream):
 
