@@ -38,7 +38,7 @@ def close_producer(signum=None, frame=None):
     producer_stream.close()
     sys.exit()
 
-# catch SIGINT (CTRL-C)
+# catch CTRL-C and unix kill
 signal.signal(signal.SIGINT, close_producer)
 signal.signal(signal.SIGTERM, close_producer)
 
