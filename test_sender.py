@@ -4,6 +4,9 @@ import formater.dlstat
 import sender.stdout
 import sender.stdouthint
 import sender.graphite
+import signal
+import sys
+import time
 
 producer_stream = producer.filereader.get_stream('sample/dlstat.txt')
 formater_it = formater.dlstat.get_iterator(producer_stream)
@@ -30,7 +33,15 @@ producer_stream = producer.dlstat.get_stream(60)
 formater_it = formater.dlstat.get_iterator(producer_stream)
 sender_it = sender.graphite.get_iterator(formater_it)
 
-for _ in range(10):
-    sender_it.next()
+def close_producer(signum=None, frame=None):
+    if signum: print('Catching signal ' + str(signum))
+    producer_stream.close()
+    sys.exit()
 
-producer_stream.close()
+# catch SIGINT (CTRL-C)
+signal.signal(signal.SIGINT, close_producer)
+signal.signal(signal.SIGTERM, close_producer)
+
+for _ in sender_it: pass
+
+close_producer()
