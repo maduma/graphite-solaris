@@ -5,5 +5,6 @@ LABEL='gfeed'
 
 DLSTAT='dlstat'
 IOSTAT='iostat'
+ZONESTAT='zonestat'
 
 HINT='CHUNK'
