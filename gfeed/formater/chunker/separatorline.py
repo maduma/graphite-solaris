@@ -1,6 +1,6 @@
 import re
 
-def get_iterator(it, pattern, discard_first=True):
+def get_iterator(it, pattern, discard_first):
 
     chunck = []
 
