@@ -1,12 +1,13 @@
-import chunker.timestamp
+import chunker.separatorline_map
 import socket
+import re
 from .. import config
 
 prefix = '{0}.{1}.{2}'.format(
     config.LABEL, socket.gethostname(), config.DLSTAT)
 
 # dlstat data are normalised (bytes/s)
-def tranform(chunk):
+def transform(chunk):
     epoch = chunk.pop(0).rstrip()
 
     for line in chunk:
@@ -25,12 +26,6 @@ def tranform(chunk):
     yield config.HINT # usefull hint for consumer
 
 def get_iterator(stream):
-
-    it = chunker.timestamp.get_iterator(stream.it, discard_first=True)
-
-    def iterator():
-        for chunk in it:
-            for line in tranform(chunk):
-                yield line
-    
-    return iterator()
+    pattern = re.compile('^\d{10}$')
+    it = chunker.separatorline_map.get_iterator(stream.it, pattern, transform)
+    return it
