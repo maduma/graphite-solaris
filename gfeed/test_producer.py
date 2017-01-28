@@ -17,10 +17,10 @@ print(st2.period)
 print(st3.period)
 print(st4.period)
 
-st = itertools.izip(st1.it, st2.it, st3.it, st4.it)
+it = itertools.izip(st1.lines, st2.lines, st3.lines, st4.lines)
 
 for _ in range(10):
-    lines = st.next()
+    lines = it.next()
     print ''.join(lines),
 
 st1.close()

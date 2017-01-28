@@ -44,6 +44,5 @@ def transform(chunk):
 
 def get_iterator(stream):
     pattern = re.compile('\d+:interval:header:since-last-interval:\d+.*')
-    it = chunker.separatorline_map.get_iterator(
-        stream.it, pattern, transform, discard_first=False)
-    return it
+    return chunker.separatorline_map.get_iterator(
+        stream.lines, pattern, transform, discard_first=False)

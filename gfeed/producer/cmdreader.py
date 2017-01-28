@@ -13,7 +13,7 @@ def get_stream(cmd, period, name='cmdreader'):
     class Stream:
         def __init__(self):
             self.period = period
-            self.it = iterator()
+            self.lines = iterator()
             self.p = p
         def close(self):
             msg = 'Stoping producer: {0} ...\n'.format(name)

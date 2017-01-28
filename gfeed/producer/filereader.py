@@ -18,7 +18,7 @@ def get_stream(path):
     class Stream:
         def __init__(self):
             self.period = period()
-            self.it = iterator()
+            self.lines = iterator()
         def close(self):
             pass
 

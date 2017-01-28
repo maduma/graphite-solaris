@@ -30,5 +30,5 @@ def transform(chunk):
 def get_iterator(stream):
 
     pattern = re.compile('^\d{10}$')
-    it = chunker.separatorline_map.get_iterator(stream.it, pattern, transform)
-    return it
+    return chunker.separatorline_map.get_iterator(
+        stream.lines, pattern, transform)
