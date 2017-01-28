@@ -16,3 +16,4 @@ def get_iterator(it, pattern, discard_first):
             chunck = [line]
         else:
             chunck.append(line)
+    yield chunck # last chunk
