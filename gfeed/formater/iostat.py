@@ -2,6 +2,7 @@ import chunker.separatorline_map
 import socket
 import re
 import subprocess
+import time
 from .. import config
 
 prefix = '{0}.{1}.{2}'.format(
@@ -9,7 +10,11 @@ prefix = '{0}.{1}.{2}'.format(
 
 device2poolmap = {}
 
+iostat_pattern =  re.compile(r'(\d+\.\d+,){8}(\d+,){2}\S+')
+
 def updatedevice2zpoolmap():
+    if ('lastupdate' in device2poolmap
+        and time.time() - device2poolmap['lastupdate'] < 3600): return
     cmd = 'timeout 30 /usr/sbin/zpool status -Tu'
     output = subprocess.Popen(
         cmd ,shell=True, stdout=subprocess.PIPE).communicate()[0]
@@ -24,14 +29,14 @@ def updatedevice2zpoolmap():
             if device_pattern.match(line):
                 device = line.split()[0]
         device2poolmap[device] = zpool
+        device2poolmap['lastupdate'] = time.time()
 
-# dlstat data are normalised (bytes/s)
 def transform(chunk):
+    updatedevice2zpoolmap()
     epoch = chunk.pop(0).rstrip()
 
     for line in chunk:
-        if line.startswith('extended'): continue
-        if line.startswith('r/s'): continue
+        if not iostat_pattern.match(line): continue
 
         fields = line.rstrip().split(',')
         (rs, ws, krs, kws) = fields[:4]
@@ -40,7 +45,7 @@ def transform(chunk):
         kbs = str(float(krs) + float(kws))
         
         if ':' in device:
-            type_name = ['nfs', device.split(':')[0]]
+            type_name = ['nfs', device.split(':')[0].replace('.', '_')]
             device = device.split(':')[1].lstrip('/').replace('/', '_')
         else:
             name = device2poolmap.get(device, None)
@@ -65,9 +70,6 @@ def transform(chunk):
     yield config.HINT # usefull hint for consumer
 
 def get_iterator(stream):
-
-    updatedevice2zpoolmap()
-
     pattern = re.compile('^\d{10}$')
     return chunker.separatorline_map.get_iterator(
         stream.lines, pattern, transform)

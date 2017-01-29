@@ -28,5 +28,5 @@ r/s,w/s,kr/s,kw/s,wait,actv,wsvc_t,asvc_t,%w,%b,device
 1485619505
 extended device statistics
 r/s,w/s,kr/s,kw/s,wait,actv,wsvc_t,asvc_t,%w,%b,device
-255.2,0.0,35.2,0.0,0.0,0.4,0.0,1.6,0,41,lxstor:/export/infra/sysadmin
-241.2,0.0,36.0,0.0,0.0,0.4,0.0,1.9,0,45,lxstor:/export/sap/sapinst
+255.2,0.0,35.2,0.0,0.0,0.4,0.0,1.6,0,41,lxstor.svr.luxair:/export/infra/sysadmin
+241.2,0.0,36.0,0.0,0.0,0.4,0.0,1.9,0,45,lxstor.srv.luxair:/export/sap/sapinst

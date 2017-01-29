@@ -1,4 +1,4 @@
-SERVER='graphitea'
+SERVER='ostack.svr.luxair'
 PORT=2003
 
 LABEL='gfeed'
